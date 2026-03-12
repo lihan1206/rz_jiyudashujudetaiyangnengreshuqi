@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+
+:root {
+  font-family: 'Noto Sans SC', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #12232b;
+  background: linear-gradient(160deg, #f2fbff 0%, #f8fbff 45%, #eef5ff 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app-root {
+  min-height: 100vh;
+  background: transparent;
+}
+
+.app-sider {
+  background: rgba(255, 255, 255, 0.76) !important;
+  backdrop-filter: blur(12px);
+  border-right: 1px solid #e6eff5;
+}
+
+.brand {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  font-weight: 700;
+  color: #0b7285;
+  letter-spacing: 0.5px;
+}
+
+.app-header {
+  background: rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid #e8f1f6;
+  padding-inline: 24px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-inner {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.app-content {
+  padding: 20px;
+}
+
+.app-footer {
+  text-align: center;
+  background: transparent;
+  color: #4a6572;
+}
+
+.glass-card {
+  border-radius: 16px;
+  border: 1px solid #e8f0f5;
+  box-shadow: 0 10px 30px rgba(35, 82, 124, 0.08);
+}
+
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(11, 114, 133, 0.14) 0%, rgba(11, 114, 133, 0) 34%),
+    radial-gradient(circle at 85% 12%, rgba(34, 139, 230, 0.16) 0%, rgba(34, 139, 230, 0) 38%),
+    linear-gradient(160deg, #f2fbff 0%, #f7fbff 55%, #edf5ff 100%);
+  padding: 20px;
+}
+
+.login-card {
+  width: min(440px, 100%);
+  border-radius: 18px;
+  box-shadow: 0 16px 36px rgba(34, 82, 124, 0.16);
+}
+
+@media (max-width: 768px) {
+  .app-content {
+    padding: 14px;
+  }
+
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 8px 0;
+    height: auto;
+  }
+}

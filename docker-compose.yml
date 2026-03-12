@@ -1,0 +1,60 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: solar_health_db
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: solar_health
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - solar_net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+    container_name: solar_health_backend
+    environment:
+      SECRET_KEY: solar-secret-key
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: solar_health
+      ALLOWED_ORIGINS: "*"
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8207:8000"
+    networks:
+      - solar_net
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: solar_health_frontend
+    depends_on:
+      - backend
+    ports:
+      - "3207:80"
+    networks:
+      - solar_net
+
+volumes:
+  mysql_data:
+
+networks:
+  solar_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.200.207.0/24
